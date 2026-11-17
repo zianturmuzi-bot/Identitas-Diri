@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petualangan Identitas Diri | Pendidikan Pancasila Kelas IV</title>
+<style>
+:root{
+  --red:#e32636; --red-dark:#a91425; --white:#fff; --cream:#fff7f5;
+  --ink:#263044; --muted:#687386; --gold:#ffd166; --green:#168653;
+  --shadow:0 12px 28px rgba(41,23,33,.14); --line:#f0d9dc;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(145deg,#fff 0%,#fff4f4 55%,#ffe5e7 100%);color:var(--ink);min-height:100vh}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:3px solid var(--red);padding:10px 4vw;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--red-dark);letter-spacing:.3px}
+.brand-mark{width:42px;height:42px;border-radius:12px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 5px 0 #9f1725}
+.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{background:#fff0f1;border:1px solid #f4c5ca;color:#9f1725;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:800}
+main{max-width:1120px;margin:24px auto;padding:0 18px 48px}
+.screen{display:none;animation:pop .35s ease}
+.screen.active{display:block}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.panel{background:#fff;border:2px solid var(--line);border-radius:24px;padding:clamp(18px,3vw,32px);box-shadow:var(--shadow)}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:center;overflow:hidden;position:relative}
+.hero:after{content:"";position:absolute;width:230px;height:230px;border-radius:38px;background:#ffe5e8;right:-75px;top:-75px;transform:rotate(25deg);z-index:0}
+.hero-copy,.hero-art{position:relative;z-index:1}
+.eyebrow{display:inline-block;background:#fff0f1;color:var(--red-dark);border-radius:999px;padding:8px 12px;font-weight:900;font-size:12px;letter-spacing:1px}
+h1{font-size:clamp(30px,5vw,54px);line-height:1.04;margin:16px 0 12px;color:#a91425}
+h2{font-size:clamp(24px,3.4vw,34px);margin:0 0 12px;color:#a91425}
+h3{margin:0 0 8px}
+.lead{font-size:17px;line-height:1.6;color:#4f596b}
+.muted{color:var(--muted);line-height:1.55}
+.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.13);transition:.15s transform,.15s box-shadow}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.13)}
+.btn-primary{background:var(--red);color:#fff}
+.btn-secondary{background:#fff;color:var(--red-dark);border:2px solid #efb7be;box-shadow:none}
+.btn-dark{background:#263044;color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.hero-art{min-height:300px;border-radius:22px;background:linear-gradient(160deg,#e32636,#a91425);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.block{position:absolute;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.25);border-radius:9px;transform:rotate(25deg)}
+.block.b1{width:90px;height:90px;left:9%;top:15%}.block.b2{width:55px;height:55px;right:12%;top:20%;transform:rotate(45deg)}.block.b3{width:120px;height:120px;right:7%;bottom:-25px}
+.avatar{width:142px;height:230px;position:relative;filter:drop-shadow(0 12px 7px rgba(0,0,0,.22));animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.avatar .head{position:absolute;width:82px;height:78px;left:30px;top:0;background:#f2c49b;border:5px solid #743c32;border-radius:14px}
+.avatar .hair{position:absolute;width:90px;height:28px;left:26px;top:-5px;background:#4a2b24;border-radius:12px 12px 5px 5px}
+.avatar .eye{position:absolute;top:35px;width:8px;height:8px;border-radius:50%;background:#263044}.avatar .eye.e1{left:50px}.avatar .eye.e2{left:83px}
+.avatar .smile{position:absolute;left:60px;top:55px;width:24px;height:10px;border-bottom:4px solid #9f3d45;border-radius:50%}
+.avatar .body{position:absolute;left:20px;top:82px;width:102px;height:83px;background:#fff;border:4px solid #d7dce5;border-radius:10px}
+.avatar .body:before{content:"";position:absolute;right:12px;top:18px;width:18px;height:17px;border:2px solid #d9dfe8;border-radius:2px;background:#fff}
+.avatar .body:after{content:"";position:absolute;left:40px;top:12px;width:14px;height:45px;background:#e32636;clip-path:polygon(50% 0,100% 18%,70% 100%,30% 100%,0 18%)}
+.avatar .arm{position:absolute;top:91px;width:28px;height:78px;background:linear-gradient(to bottom,#fff 0 34%,#f2c49b 35% 100%);border:3px solid #d7dce5;border-radius:8px}.avatar .arm.a1{left:0;transform:rotate(12deg)}.avatar .arm.a2{right:0;transform:rotate(-12deg)}
+.avatar .leg{position:absolute;top:160px;width:38px;height:66px;background:#e32636;border:4px solid #a91425;border-radius:8px}
+.avatar .leg:after{content:"";position:absolute;left:-4px;bottom:-5px;width:38px;height:12px;background:#263044;border:2px solid #151d2a;border-radius:4px}.avatar .leg.l1{left:27px}.avatar .leg.l2{right:27px}
+.identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:800;margin:0 0 7px;color:#5d2630}
+.field input,.field textarea{width:100%;border:2px solid #f0cbd0;border-radius:12px;padding:12px;background:#fffafa;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px #ffe1e5}
+.logo-box{width:96px;height:96px;border:2px dashed #d88b95;border-radius:18px;background:#fff7f7;color:#a91425;display:grid;place-items:center;text-align:center;font-size:13px;font-weight:900;padding:8px;overflow:hidden}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.logo-box{width:116px;height:116px;border:0;background:#fff;border-radius:50%;padding:4px;box-shadow:0 5px 15px rgba(0,0,0,.12)}
+.logo-box .logo-fallback{display:none;width:100%;height:100%;border-radius:50%;place-items:center;background:radial-gradient(circle,#168653 0 48%,#fff 49% 53%,#e32636 54% 100%);color:#fff;font-weight:1000;text-shadow:0 1px 3px #333;font-size:18px}
+.cover-details{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.cover-detail{background:#fff7f7;border:1px solid #f0cbd0;border-radius:14px;padding:11px 13px}
+.cover-detail small{display:block;color:#9f5962;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cover-detail b{font-size:15px;color:#762b36}
+.cover-title{font-size:clamp(16px,2vw,20px);font-weight:900;color:#263044;line-height:1.35;margin:8px 0}
+.cover-start{font-size:17px;padding:15px 25px;letter-spacing:.5px}
+@media(max-width:520px){.cover-details{grid-template-columns:1fr}.logo-row{align-items:flex-start}}
+.logo-row{display:flex;gap:14px;align-items:center;margin:18px 0}
+.note{background:#fff8e6;border-left:5px solid #e9ad32;border-radius:12px;padding:12px 14px;color:#66501e;font-size:13px;line-height:1.5}
+.section-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
+.section-tag{font-size:12px;font-weight:900;color:var(--red);background:#fff0f1;padding:8px 11px;border-radius:999px;white-space:nowrap}
+.navgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:18px 0}
+.navbtn{border:1px solid #f0cbd0;background:#fff;border-radius:12px;padding:10px 6px;font-size:12px;font-weight:800;color:#85313d}
+.navbtn.active{background:var(--red);color:#fff;border-color:var(--red)}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.info-card{border:2px solid #f3d5d8;border-radius:18px;padding:16px;background:linear-gradient(180deg,#fff,#fff8f8);min-height:155px}
+.info-icon{font-size:34px;display:block;margin-bottom:8px}
+.info-card p{font-size:13px;line-height:1.45;color:#5b6474;margin:6px 0 0}
+.objective-box{background:#fff1f2;border:2px solid #f2c4ca;border-radius:18px;padding:20px;font-size:18px;line-height:1.6}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.step{background:#fff;border:1px solid #f1d3d7;border-radius:16px;padding:15px}
+.step b{color:var(--red-dark)}
+.game-world{background:linear-gradient(180deg,#ffeff0 0%,#fff 70%);border:2px solid #f1c6cb;border-radius:22px;padding:20px;position:relative;overflow:hidden}
+.world-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.station-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0}
+.station{border:2px solid #edc0c6;border-radius:16px;background:#fff;padding:14px 8px;text-align:center;color:#76313b;font-weight:900;min-height:120px;transition:.2s}
+.station:hover{transform:translateY(-4px);box-shadow:0 8px 14px #e8bfc4}
+.station.visited{background:#fff0f1;border-color:var(--red);box-shadow:inset 0 0 0 2px #fff}
+.station .emoji{font-size:32px;display:block;margin-bottom:8px}
+.station small{display:block;font-size:11px;color:#788091;margin-top:4px}
+.discovery{background:#fff;border:2px solid #f1d0d4;border-radius:16px;padding:16px;min-height:90px;line-height:1.55}
+.progress-mini{height:10px;background:#f6dadd;border-radius:999px;overflow:hidden;flex:1;min-width:100px}
+.progress-mini span{display:block;height:100%;width:0;background:var(--red);transition:width .25s}
+.identity-card{margin-top:18px;border:3px solid var(--red);border-radius:18px;padding:16px;background:linear-gradient(135deg,#fff,#fff0f1);display:none}
+.identity-card.show{display:block;animation:pop .3s ease}
+.quiz-shell{max-width:780px;margin:auto}
+.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.quiz-progress{height:12px;background:#f3d6d9;border-radius:999px;overflow:hidden;margin:14px 0 22px}
+.quiz-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#e32636,#ff8791);transition:width .3s}
+.dots{display:flex;gap:7px;margin:10px 0 18px;flex-wrap:wrap}
+.dot{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#f5e5e7;color:#8d5360;font-size:12px;font-weight:900}
+.dot.done{background:#1a9a61;color:#fff}
+.question-card{background:linear-gradient(145deg,#fff,#fff6f7);border:2px solid #f1cbd0;border-radius:22px;padding:clamp(18px,4vw,30px);text-align:center}
+.question-label{color:var(--red);font-size:12px;font-weight:900;letter-spacing:1px}
+.question-text{font-size:clamp(20px,3.5vw,27px);line-height:1.4;font-weight:900;margin:16px 0 24px}
+.answer-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.answer-btn{border:3px solid #e7c1c6;background:#fff;border-radius:16px;padding:18px;font-size:20px;font-weight:900;color:#80313d}
+.answer-btn:hover:not(:disabled){border-color:var(--red);background:#fff1f2;transform:translateY(-2px)}
+.answer-btn:disabled{opacity:.6;cursor:not-allowed}
+.feedback{margin-top:18px;border-radius:14px;padding:14px;text-align:left;display:none;line-height:1.5}
+.feedback.show{display:block}
+.feedback.good{background:#e8fff2;border:2px solid #8dd8af;color:#12663e}
+.feedback.try{background:#fff8e6;border:2px solid #edcf7d;color:#73551a}
+.quiz-actions{display:flex;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
+.reflection-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.result{background:#fff0f1;border:2px solid #f2c2c8;border-radius:20px;padding:20px;text-align:center;margin-bottom:18px}
+.score{font-size:48px;font-weight:1000;color:var(--red-dark)}
+.footer{text-align:center;color:#87909d;font-size:12px;margin:24px 0 0}
+.hidden{display:none!important}
+@media(max-width:800px){
+ .hero{grid-template-columns:1fr}.hero-art{min-height:250px}
+ .cards{grid-template-columns:repeat(2,1fr)}
+ .station-grid{grid-template-columns:repeat(2,1fr)}
+ .navgrid{grid-template-columns:repeat(3,1fr)}
+ .steps{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+ main{margin:14px auto;padding:0 10px 32px}
+ .identity-grid,.reflection-grid{grid-template-columns:1fr}
+ .cards{grid-template-columns:1fr 1fr}
+ .station-grid{grid-template-columns:1fr 1fr}
+ .answer-row{grid-template-columns:1fr}
+ .topbar{padding:8px 12px}.brand{font-size:13px}.brand-mark{width:36px;height:36px}
+ .section-head{display:block}.section-tag{display:inline-block;margin-top:8px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">★</div><span>PETUALANGAN IDENTITAS</span></div>
+  <div class="top-actions"><span class="pill">Pendidikan Pancasila • Kelas 4</span><span class="pill" id="headerProgress">Progres: 0/10 soal</span></div>
+</header>
+<main>
+  <div class="navgrid" aria-label="Navigasi media">
+    <button class="navbtn active" data-screen="intro">Pembuka</button>
+    <button class="navbtn" data-screen="tujuan">Tujuan</button>
+    <button class="navbtn" data-screen="materi">Materi</button>
+    <button class="navbtn" data-screen="aktivitas">Misi</button>
+    <button class="navbtn" data-screen="kuis">Kuis</button>
+    <button class="navbtn" data-screen="refleksi">Refleksi</button>
+  </div>
+
+  <section class="screen active" id="intro">
+    <div class="panel hero">
+      <div class="hero-copy">
+        <span class="eyebrow">MEDIA PEMBELAJARAN INTERAKTIF • PGRI</span>
+        <div class="logo-row" style="margin-top:14px">
+          <div class="logo-box" id="logoPreview">
+            <img src="data:image/png;base64,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" alt="Logo resmi Persatuan Guru Republik Indonesia">
+            <div class="logo-fallback" aria-label="Logo PGRI">PGRI</div>
+          </div>
+          <div>
+            <b>Persatuan Guru Republik Indonesia</b>
+            <div class="muted">Media Pembelajaran Pendidikan Pancasila</div>
+          </div>
+        </div>
+        <h1>Petualangan<br>Identitas Diri</h1>
+        <div class="cover-title">Materi Pembelajaran: Mengenal Identitas Diri</div>
+        <p class="lead">Ayo masuk ke Dunia Merah Putih! Kenali nama, asal daerah, bahasa, budaya, dan kebiasaan yang membuat setiap orang istimewa.</p>
+        <div class="cover-details">
+          <div class="cover-detail"><small>Mata Pelajaran</small><b>Pendidikan Pancasila</b></div>
+          <div class="cover-detail"><small>Jenjang dan Kelas</small><b>Sekolah Dasar • Kelas IV</b></div>
+          <div class="cover-detail"><small>Nama Pembuat</small><b>Turmuzi, S.Pd.</b></div>
+          <div class="cover-detail"><small>Asal Pengurus Cabang PGRI</small><b>SUELA</b></div>
+        </div>
+        <button class="btn btn-primary cover-start" id="startBtn">MULAI BELAJAR ▶</button>
+        <p class="muted" style="font-size:11px;margin-top:12px">Logo resmi PGRI menggunakan gambar yang disediakan pada media ini.</p>
+      </div>
+      <div class="hero-art" aria-label="Karakter animasi bergaya balok memakai seragam putih merah sekolah dasar">
+        <div class="block b1"></div><div class="block b2"></div><div class="block b3"></div>
+        <div class="avatar"><div class="hair"></div><div class="head"></div><div class="eye e1"></div><div class="eye e2"></div><div class="smile"></div><div class="body"></div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="tujuan">
+    <div class="panel">
+      <div class="section-head"><div><span class="eyebrow">LEVEL 1 • SIAPKAN DIRIMU</span><h2>Tujuan Pembelajaran</h2></div><span class="section-tag">Kelas IV SD</span></div>
+      <div class="objective-box">Melalui kegiatan pengamatan gambar, diskusi, dan tanya jawab, murid kelas 4 mampu mengidentifikasi identitas diri yang meliputi <b>nama, asal daerah, bahasa, budaya, dan kebiasaan</b> yang dimiliki dengan benar minimal <b>4 dari 5 aspek</b>.</div>
+      <div class="steps">
+        <div class="step"><b>👀 Amati</b><p class="muted">Amati gambar dan ikon pada setiap pos petualangan.</p></div>
+        <div class="step"><b>💬 Diskusikan</b><p class="muted">Ceritakan persamaan dan perbedaan identitas diri dengan teman.</p></div>
+        <div class="step"><b>🙋 Tanya jawab</b><p class="muted">Jawab pertanyaan dan sampaikan pendapat dengan santun.</p></div>
+      </div>
+      <div style="margin-top:20px"><button class="btn btn-primary" data-go="materi">Pelajari Materi →</button></div>
+    </div>
+  </section>
+
+  <section class="screen" id="materi">
+    <div class="panel">
+      <div class="section-head"><div><span class="eyebrow">LEVEL 2 • KENALI DIRIMU</span><h2>Apa Itu Identitas Diri?</h2></div><span class="section-tag">Materi Inti</span></div>
+      <p class="lead">Identitas diri adalah ciri atau keterangan yang membantu kita mengenal siapa diri kita. Setiap orang memiliki identitas yang dapat sama atau berbeda.</p>
+      <div class="cards">
+        <div class="info-card"><span class="info-icon">🪪</span><h3>Nama</h3><p>Nama digunakan untuk mengenali dan menyebut seseorang.</p></div>
+        <div class="info-card"><span class="info-icon">🗺️</span><h3>Asal daerah</h3><p>Daerah tempat seseorang berasal, misalnya Lombok, Bali, atau Jawa.</p></div>
+        <div class="info-card"><span class="info-icon">💬</span><h3>Bahasa</h3><p>Bahasa digunakan untuk berkomunikasi, misalnya bahasa Indonesia dan bahasa daerah.</p></div>
+        <div class="info-card"><span class="info-icon">🎭</span><h3>Budaya</h3><p>Budaya dapat berupa tarian, lagu, pakaian adat, makanan khas, dan tradisi.</p></div>
+        <div class="info-card"><span class="info-icon">🌞</span><h3>Kebiasaan</h3><p>Kegiatan yang sering dilakukan, misalnya berdoa, membaca, atau membantu orang tua.</p></div>
+      </div>
+      <div class="note" style="margin-top:18px"><b>Ingat!</b> Kita boleh memiliki identitas yang berbeda. Hargai teman, jangan mengejek nama, bahasa, asal daerah, budaya, atau kebiasaannya.</div>
+      <div style="margin-top:20px"><button class="btn btn-primary" data-go="aktivitas">Masuk ke Misi Interaktif →</button></div>
+    </div>
+  </section>
+
+  <section class="screen" id="aktivitas">
+    <div class="panel">
+      <div class="section-head"><div><span class="eyebrow">LEVEL 3 • JELAJAHI DUNIA MERAH PUTIH</span><h2>Misi: Temukan 5 Pos Identitas</h2></div><span class="section-tag">Aktivitas Interaktif</span></div>
+      <p class="muted">Klik setiap pos untuk membuka petunjuk. Selesaikan kelima pos, lalu buat kartu identitas sederhana.</p>
+      <div class="game-world">
+        <div class="world-top"><b>🧱 Peta Petualangan</b><div style="display:flex;align-items:center;gap:10px;min-width:170px"><small id="stationCount">0/5 pos ditemukan</small><div class="progress-mini"><span id="stationBar"></span></div></div></div>
+        <div class="station-grid">
+          <button class="station" data-station="0"><span class="emoji">🪪</span>Pos Nama<small>Ketuk untuk membuka</small></button>
+          <button class="station" data-station="1"><span class="emoji">🗺️</span>Pos Daerah<small>Ketuk untuk membuka</small></button>
+          <button class="station" data-station="2"><span class="emoji">💬</span>Pos Bahasa<small>Ketuk untuk membuka</small></button>
+          <button class="station" data-station="3"><span class="emoji">🎭</span>Pos Budaya<small>Ketuk untuk membuka</small></button>
+          <button class="station" data-station="4"><span class="emoji">🌞</span>Pos Kebiasaan<small>Ketuk untuk membuka</small></button>
+        </div>
+        <div class="discovery" id="stationInfo" aria-live="polite"><b>Selamat datang, penjelajah!</b><br>Pilih salah satu pos di atas untuk menemukan petunjuk identitas diri.</div>
+      </div>
+      <div class="panel" style="box-shadow:none;margin-top:18px">
+        <h3>🎒 Buat Kartu Identitasmu</h3>
+        <p class="muted">Isi contoh atau gunakan nama panggilan. Isian ini hanya ditampilkan di halaman ini dan tidak dikirim ke mana pun.</p>
+        <div class="identity-grid">
+          <div class="field"><label for="studentName">Nama / nama panggilan</label><input id="studentName" placeholder="Contoh: Bima"></div>
+          <div class="field"><label for="studentOrigin">Asal daerah</label><input id="studentOrigin" placeholder="Contoh: Lombok"></div>
+          <div class="field"><label for="studentLanguage">Bahasa yang digunakan</label><input id="studentLanguage" placeholder="Contoh: Indonesia dan Sasak"></div>
+          <div class="field"><label for="studentCulture">Budaya yang dikenal</label><input id="studentCulture" placeholder="Contoh: Bau Nyale"></div>
+          <div class="field"><label for="studentHabit">Kebiasaan baik</label><input id="studentHabit" placeholder="Contoh: Membaca setiap sore"></div>
+        </div>
+        <button class="btn btn-primary" id="makeCard" style="margin-top:15px">Tampilkan Kartu Identitasku</button>
+        <div class="identity-card" id="myCard" aria-live="polite"></div>
+      </div>
+      <div style="margin-top:18px"><button class="btn btn-primary" data-go="kuis">Tantang Dirimu: Mulai Kuis →</button></div>
+    </div>
+  </section>
+
+  <section class="screen" id="kuis">
+    <div class="panel quiz-shell">
+      <div class="section-head"><div><span class="eyebrow">LEVEL 4 • TANTANGAN PENJELAJAH</span><h2>Kuis Benar atau Salah</h2></div><span class="section-tag">10 Tantangan</span></div>
+      <div class="quiz-top"><b id="questionCounter">Soal 1 dari 10</b><span class="pill" id="scoreLabel">Skor percobaan pertama: 0/10</span></div>
+      <div class="quiz-progress"><span id="quizBar"></span></div>
+      <div class="dots" id="questionDots" aria-label="Indikator kemajuan soal"><span class="dot">1</span><span class="dot">2</span><span class="dot">3</span><span class="dot">4</span><span class="dot">5</span><span class="dot">6</span><span class="dot">7</span><span class="dot">8</span><span class="dot">9</span><span class="dot">10</span></div>
+      <div class="question-card">
+        <div class="question-label">BACA PERNYATAAN DENGAN TELITI</div>
+        <div class="question-text" id="questionText">Nama merupakan salah satu bagian dari identitas diri.</div>
+        <div class="answer-row">
+          <button class="answer-btn" id="trueBtn">✓ BENAR</button>
+          <button class="answer-btn" id="falseBtn">✕ SALAH</button>
+        </div>
+        <div class="feedback" id="quizFeedback" aria-live="polite"></div>
+      </div>
+      <div class="quiz-actions">
+        <span class="muted" id="attemptInfo">Pilih satu jawaban. Jika belum tepat, baca petunjuk dan coba lagi.</span>
+        <button class="btn btn-primary hidden" id="nextQuestion">Soal Berikutnya →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="refleksi">
+    <div class="panel">
+      <div class="section-head"><div><span class="eyebrow">LEVEL 5 • SELESAI!</span><h2>Hasil dan Refleksi</h2></div><span class="section-tag">Kamu Penjelajah Hebat</span></div>
+      <div class="result">
+        <div>Skor jawaban benar pada percobaan pertama</div>
+        <div class="score" id="finalScore">0/10</div>
+        <p class="muted" id="resultAspects">Aspek yang dikenali: 0/5</p>
+        <b id="resultMessage">Terus berlatih, ya!</b>
+        <p class="muted" id="resultDetail">Kamu boleh mencoba kembali untuk meningkatkan pemahaman.</p>
+      </div>
+      <h3>💭 Ayo Refleksi</h3>
+      <div class="reflection-grid">
+        <div class="field"><label for="reflectionOne">1. Sebutkan satu hal baru yang kamu pelajari tentang identitas diri.</label><textarea id="reflectionOne" rows="3" placeholder="Menurut saya, identitas diri adalah ..."></textarea></div>
+        <div class="field"><label for="reflectionTwo">2. Bagaimana sikapmu kepada teman yang memiliki bahasa atau budaya berbeda?</label><textarea id="reflectionTwo" rows="3" placeholder="Saya akan ..."></textarea></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <button class="btn btn-primary" id="saveReflection">Simpan Refleksi</button>
+        <button class="btn btn-secondary" id="retryAll">↻ Coba Lagi dari Awal</button>
+      </div>
+      <div class="feedback good" id="reflectionSaved" style="margin-top:14px">Refleksimu sudah ditampilkan. Terima kasih sudah belajar dengan semangat!</div>
+    </div>
+  </section>
+  <div class="footer">Media pembelajaran orisinal • Gaya permainan balok terinspirasi game petualangan • Pendidikan Pancasila Kelas IV</div>
+</main>
+<script>
+const screens = ["intro","tujuan","materi","aktivitas","kuis","refleksi"];
+const navButtons = [...document.querySelectorAll(".navbtn")];
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("active",s.id===id));
+  navButtons.forEach(b=>b.classList.toggle("active",b.dataset.screen===id));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+navButtons.forEach(b=>b.addEventListener("click",()=>showScreen(b.dataset.screen)));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showScreen(b.dataset.go)));
+
+document.getElementById("startBtn").addEventListener("click",()=>{
+  showScreen("tujuan");
+});
+
+const stationData=[
+  ["🪪 Pos Nama","Nama adalah sebutan untuk mengenali seseorang. Setiap orang dapat memiliki nama yang berbeda. Gunakan nama dengan sopan dan jangan mengejek nama teman."],
+  ["🗺️ Pos Asal Daerah","Asal daerah berkaitan dengan tempat seseorang berasal. Indonesia memiliki banyak daerah dengan keunikan masing-masing."],
+  ["💬 Pos Bahasa","Bahasa membantu kita berkomunikasi. Ada bahasa Indonesia dan berbagai bahasa daerah. Kita perlu menghargai bahasa yang digunakan orang lain."],
+  ["🎭 Pos Budaya","Budaya memiliki banyak bentuk, misalnya tarian, lagu daerah, pakaian adat, makanan khas, dan tradisi."],
+  ["🌞 Pos Kebiasaan","Kebiasaan adalah kegiatan yang sering dilakukan, misalnya berdoa, belajar, membaca, menjaga kebersihan, dan membantu keluarga."]
+];
+const visited=new Set();
+document.querySelectorAll(".station").forEach(btn=>btn.addEventListener("click",()=>{
+  const i=Number(btn.dataset.station);visited.add(i);btn.classList.add("visited");
+  btn.querySelector("small").textContent="✓ Sudah ditemukan";
+  document.getElementById("stationInfo").innerHTML="<b>"+stationData[i][0]+"</b><br>"+stationData[i][1];
+  document.getElementById("stationCount").textContent=visited.size+"/5 pos ditemukan";
+  document.getElementById("stationBar").style.width=(visited.size/5*100)+"%";
+}));
+document.getElementById("makeCard").addEventListener("click",()=>{
+  const fields=[
+    ["Nama",document.getElementById("studentName").value],
+    ["Asal daerah",document.getElementById("studentOrigin").value],
+    ["Bahasa",document.getElementById("studentLanguage").value],
+    ["Budaya",document.getElementById("studentCulture").value],
+    ["Kebiasaan",document.getElementById("studentHabit").value]
+  ];
+  const filled=fields.filter(x=>x[1].trim());
+  if(!filled.length){alert("Isi setidaknya satu bagian kartu identitas.");return;}
+  const card=document.getElementById("myCard");
+  card.innerHTML="<h3>🪪 KARTU IDENTITASKU</h3><p>Setiap orang istimewa dan patut dihargai.</p>"+fields.map(x=>"<p><b>"+x[0]+":</b> "+(x[1].trim()?escapeHtml(x[1].trim()):"Belum diisi")+"</p>").join("");
+  card.classList.add("show");
+});
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+const questions=[
+ {aspect:"Nama",text:"Nama digunakan untuk mengenali dan menyebut seseorang.",answer:"benar",hint:"Petunjuk: pikirkan informasi yang biasa kita gunakan saat memanggil atau memperkenalkan seseorang.",why:"Nama membantu kita mengenali dan menyebut seseorang. Nama merupakan bagian dari identitas diri."},
+ {aspect:"Nama",text:"Kita boleh mengejek nama teman jika namanya berbeda dari nama kita.",answer:"salah",hint:"Petunjuk: pikirkan bagaimana perasaan teman jika namanya dijadikan bahan ejekan.",why:"Nama teman harus dihargai. Kita tidak boleh mengejek nama siapa pun."},
+ {aspect:"Asal daerah",text:"Asal daerah menunjukkan daerah tempat seseorang berasal.",answer:"benar",hint:"Petunjuk: asal daerah berkaitan dengan tempat, bukan makanan atau cita-cita.",why:"Asal daerah berkaitan dengan tempat seseorang berasal, misalnya Lombok, Bali, atau Jawa."},
+ {aspect:"Asal daerah",text:"Semua murid dalam satu kelas harus berasal dari daerah yang sama.",answer:"salah",hint:"Petunjuk: dalam satu kelas, murid dapat memiliki keluarga dan asal daerah yang beragam.",why:"Murid dapat berasal dari daerah yang berbeda. Perbedaan asal daerah harus dihargai."},
+ {aspect:"Bahasa",text:"Bahasa digunakan untuk berkomunikasi dengan orang lain.",answer:"benar",hint:"Petunjuk: pikirkan alat yang kita gunakan untuk menyampaikan pesan dan berbicara.",why:"Bahasa membantu kita berkomunikasi. Ada bahasa Indonesia dan berbagai bahasa daerah."},
+ {aspect:"Bahasa",text:"Teman yang menggunakan bahasa daerah berbeda tidak boleh diajak berteman.",answer:"salah",hint:"Petunjuk: apakah perbedaan bahasa menghalangi kita untuk saling menghormati dan bermain bersama?",why:"Kita tetap dapat berteman meskipun menggunakan bahasa yang berbeda. Kita harus saling menghargai."},
+ {aspect:"Budaya",text:"Tarian daerah dan lagu daerah merupakan contoh budaya.",answer:"benar",hint:"Petunjuk: ingat contoh budaya yang dapat dilihat atau didengar dari suatu daerah.",why:"Budaya dapat berupa tarian, lagu daerah, pakaian adat, makanan khas, dan tradisi."},
+ {aspect:"Budaya",text:"Budaya suatu daerah hanya berupa pakaian adat.",answer:"salah",hint:"Petunjuk: sebutkan contoh budaya lain selain pakaian adat.",why:"Budaya memiliki banyak bentuk, seperti tarian, lagu, makanan khas, dan tradisi."},
+ {aspect:"Kebiasaan",text:"Kebiasaan adalah kegiatan yang sering dilakukan dalam kehidupan sehari-hari.",answer:"benar",hint:"Petunjuk: pikirkan kegiatan yang dilakukan berulang kali, misalnya membaca atau merapikan tempat tidur.",why:"Kebiasaan merupakan kegiatan yang sering dilakukan dalam kehidupan sehari-hari."},
+ {aspect:"Kebiasaan",text:"Setiap orang harus memiliki kebiasaan yang sama persis.",answer:"salah",hint:"Petunjuk: setiap keluarga dan orang dapat memiliki kegiatan sehari-hari yang berbeda.",why:"Kebiasaan setiap orang dapat berbeda. Kita perlu menghargai kebiasaan baik yang dimiliki orang lain."}
+];
+let qIndex=0;
+let attempts=Array(questions.length).fill(0);
+let firstTryCorrect=Array(questions.length).fill(false);
+let locked=Array(questions.length).fill(false);
+let firstScore=0;
+function updateHeader(){document.getElementById("headerProgress").textContent="Progres: "+locked.filter(Boolean).length+"/10 soal";}
+function renderQuestion(){
+  const q=questions[qIndex];
+  document.getElementById("questionCounter").textContent="Soal "+(qIndex+1)+" dari "+questions.length;
+  document.getElementById("questionText").textContent=q.text;
+  document.getElementById("quizBar").style.width=(locked.filter(Boolean).length/questions.length*100)+"%";
+  document.getElementById("scoreLabel").textContent="Skor percobaan pertama: "+firstScore+"/10";
+  document.getElementById("attemptInfo").textContent=attempts[qIndex]===0?"Pilih satu jawaban. Jika belum tepat, baca petunjuk dan coba lagi.":"Coba lagi sampai jawabanmu tepat.";
+  const dots=document.querySelectorAll(".dot");
+  dots.forEach((d,i)=>{d.classList.toggle("done",locked[i]);d.textContent=locked[i]?"✓":String(i+1);});
+  const fb=document.getElementById("quizFeedback");fb.className="feedback";fb.textContent="";
+  const next=document.getElementById("nextQuestion");next.classList.toggle("hidden",!locked[qIndex]);
+  document.getElementById("trueBtn").disabled=locked[qIndex];
+  document.getElementById("falseBtn").disabled=locked[qIndex];
+  updateHeader();
+}
+function answer(choice){
+  if(locked[qIndex])return;
+  const q=questions[qIndex];
+  const isCorrect=choice===q.answer;
+  if(attempts[qIndex]===0){
+    firstTryCorrect[qIndex]=isCorrect;
+    if(isCorrect)firstScore++;
+  }
+  attempts[qIndex]++;
+  const fb=document.getElementById("quizFeedback");
+  if(isCorrect){
+    locked[qIndex]=true;
+    fb.className="feedback good show";
+    fb.innerHTML="<b>KamuHebat!</b> 🌟 "+q.why;
+    document.getElementById("trueBtn").disabled=true;
+    document.getElementById("falseBtn").disabled=true;
+    document.getElementById("nextQuestion").classList.remove("hidden");
+    document.getElementById("attemptInfo").textContent=firstTryCorrect[qIndex]?"Benar pada percobaan pertama. Skor bertambah!":"Jawabanmu sudah tepat. Skor percobaan pertama tidak berubah.";
+  }else{
+    fb.className="feedback try show";
+    fb.innerHTML="<b>Belum tepat, ayo berpikir lagi!</b><br>"+q.hint;
+    document.getElementById("attemptInfo").textContent="Baca petunjuk, lalu pilih lagi. Kamu pasti bisa!";
+  }
+  document.getElementById("scoreLabel").textContent="Skor percobaan pertama: "+firstScore+"/10";
+  updateHeader();
+}
+document.getElementById("trueBtn").addEventListener("click",()=>answer("benar"));
+document.getElementById("falseBtn").addEventListener("click",()=>answer("salah"));
+document.getElementById("nextQuestion").addEventListener("click",()=>{
+  if(!locked[qIndex])return;
+  if(qIndex<questions.length-1){qIndex++;renderQuestion();window.scrollTo({top:0,behavior:"smooth"});}
+  else{showResults();showScreen("refleksi");}
+});
+function showResults(){
+  const aspectNames=["Nama","Asal daerah","Bahasa","Budaya","Kebiasaan"];
+  const mastered=aspectNames.filter(name=>questions.some((q,i)=>q.aspect===name&&firstTryCorrect[i])).length;
+  document.getElementById("finalScore").textContent=firstScore+"/10";
+  document.getElementById("resultAspects").textContent="Aspek yang dikenali pada percobaan pertama: "+mastered+"/5";
+  const msg=document.getElementById("resultMessage");
+  const detail=document.getElementById("resultDetail");
+  if(mastered>=4){msg.textContent="Hebat! Tujuan pembelajaran tercapai! 🏆";detail.textContent="Kamu berhasil mengenali minimal 4 dari 5 aspek identitas diri pada percobaan pertama. Terus hargai identitas diri dan teman-temanmu.";}
+  else{msg.textContent="Terus berlatih, Penjelajah! 💪";detail.textContent="Kamu sudah menyelesaikan semua tantangan. Pelajari kembali materi dan coba lagi. Aspek yang dihitung adalah nama, asal daerah, bahasa, budaya, dan kebiasaan.";}
+}
+document.getElementById("saveReflection").addEventListener("click",()=>{
+  const a=document.getElementById("reflectionOne").value.trim();
+  const b=document.getElementById("reflectionTwo").value.trim();
+  if(!a&&!b){alert("Tuliskan setidaknya satu jawaban refleksi.");return;}
+  const box=document.getElementById("reflectionSaved");
+  box.textContent="Refleksi tersimpan pada tampilan ini. Terima kasih sudah belajar dan menghargai perbedaan!";
+  box.classList.add("show");
+});
+document.getElementById("retryAll").addEventListener("click",()=>{
+  qIndex=0;attempts=Array(questions.length).fill(0);firstTryCorrect=Array(questions.length).fill(false);locked=Array(questions.length).fill(false);firstScore=0;
+  visited.clear();
+  document.querySelectorAll(".station").forEach((b,i)=>{b.classList.remove("visited");b.querySelector("small").textContent="Ketuk untuk membuka";});
+  document.getElementById("stationCount").textContent="0/5 pos ditemukan";
+  document.getElementById("stationBar").style.width="0%";
+  document.getElementById("stationInfo").innerHTML="<b>Selamat datang, penjelajah!</b><br>Pilih salah satu pos di atas untuk menemukan petunjuk identitas diri.";
+  ["studentName","studentOrigin","studentLanguage","studentCulture","studentHabit","reflectionOne","reflectionTwo"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("myCard").classList.remove("show");
+  document.getElementById("myCard").innerHTML="";
+  document.getElementById("reflectionSaved").classList.remove("show");
+  document.getElementById("finalScore").textContent="0/10";
+  document.getElementById("resultAspects").textContent="Aspek yang dikenali: 0/5";
+  document.getElementById("resultMessage").textContent="Terus berlatih, ya!";
+  document.getElementById("resultDetail").textContent="Kamu boleh mencoba kembali untuk meningkatkan pemahaman.";
+  renderQuestion();showScreen("intro");
+});
+renderQuestion();
+</script>
+</body>
+</html>
